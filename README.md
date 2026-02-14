@@ -35,52 +35,52 @@ you if you don't already have one.
 
 To install uv on OSX/Linux, run:
 
-```console
-$ curl -LsSf https://astral.sh/uv/install.sh | sh
+```sh
+ curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 On Windows, run:
 
-```console
-> powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```sh
+ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
 Then, to run the latest released version of pytr:
 
-```console
-$ uvx pytr@latest
+```sh
+ uvx pytr@latest
 ```
 
 If you want to use the cutting-edge version, use this command instead:
 
-```console
-$ uvx --with git+https://github.com/pytr-org/pytr.git pytr
+```sh
+ uvx --with git+https://github.com/pytr-org/pytr.git pytr
 ```
 
 ## Usage
 
-<!-- runcmd code:console COLUMNS=120 uv run --python 3.13 pytr -->
+<!-- runcmd code:console uv run --python 3.13 pytr help --for-readme -->
 ```console
 usage: pytr [-h] [-V] [-v {warning,info,debug}] [--debug-logfile DEBUG_LOGFILE] [--debug-log-filter DEBUG_LOG_FILTER]
-            {help,login,dl_docs,portfolio,details,get_price_alarms,set_price_alarms,export_transactions,completion} ...
+            {help,login,portfolio,details,dl_docs,export_transactions,get_price_alarms,set_price_alarms,completion} ...
 
 Use "pytr command_name --help" to get detailed help to a specific command
 
 Commands:
-  {help,login,dl_docs,portfolio,details,get_price_alarms,set_price_alarms,export_transactions,completion}
+  {help,login,portfolio,details,dl_docs,export_transactions,get_price_alarms,set_price_alarms,completion}
                                         Desired action to perform
     help                                Print this help message
     login                               Check if credentials file exists. If not create it and ask for input. Try to
                                         login. Ask for device reset if needed
+    portfolio                           Show current portfolio
+    details                             Get details for an ISIN
     dl_docs                             Download all pdf documents from the timeline and sort them into folders. Also
                                         export account transactions (account_transactions.csv) and JSON files with all
                                         events (events_with_documents.json and other_events.json)
-    portfolio                           Show current portfolio
-    details                             Get details for an ISIN
+    export_transactions                 Read data from the TR timeline and export transactions into a file, e.g. as csv
+                                        into account_transactions.csv.
     get_price_alarms                    Get current price alarms
     set_price_alarms                    Set new price alarms
-    export_transactions                 Create a CSV with the deposits and removals ready for importing into Portfolio
-                                        Performance
     completion                          Print shell tab completion
 
 Options:
@@ -109,9 +109,9 @@ device reset - a private key will be generated that pins your "device". The priv
 procedure will log you out from your mobile device.
 
 ```sh
-$ pytr login
-$ # or
-$ pytr login --phone_no +49123456789 --pin 1234
+ pytr login
+ # or
+ pytr login --phone_no +49123456789 --pin 1234
 ```
 
 If no arguments are supplied pytr will look for them in the file `~/.pytr/credentials` (the first line must contain
@@ -123,20 +123,20 @@ the phone number, the second line the pin). If the file doesn't exist pytr will 
 
 Clone the repository:
 
-```console
-$ git clone https://github.com/pytr-org/pytr.git
+```sh
+ git clone https://github.com/pytr-org/pytr.git
 ```
 
 Install dependencies:
 
-```console
-$ uv sync
+```sh
+ uv sync
 ```
 
 Run the tests to ensure everything is set up correctly:
 
-```console
-$ uv run pytest
+```sh
+ uv run pytest
 ```
 
 ### Linting and Code Formatting
@@ -169,10 +169,10 @@ checks and type checks.
 
 ### Keep the readme updated
 
-This readme contains a few automatically generated bits. To keep them up to date, simply run the following command:
+This readme contains a few automatically generated bits. To keep them up to date, simply run the following command: (Never start it from an activated venv!)
 
-```console
-$ uvx mksync@0.1.4 -i README.md
+```sh
+ uvx mksync@0.1.5 -i README.md
 ```
 
 ## License
